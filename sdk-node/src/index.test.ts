@@ -516,7 +516,10 @@ test('le quickstart du README passe le typage, et un payload sans merchantPhone 
           strict: true,
           noEmit: true,
           skipLibCheck: true,
-          baseUrl: '.',
+          // Pas de `baseUrl` : l'option est supprimée dans les TypeScript
+          // récents (TS5102) et elle est inutile ici — les chemins de `paths`
+          // sont ABSOLUS, donc résolus sans elle. Le test tournait au vert en
+          // local (TS 5.9) et rouge en intégration continue.
           paths: { '@itick/ingest': [path.join(SDK_ROOT, 'src', 'index.ts')] },
         },
         files: ['quickstart.ts', 'ancien-quickstart.ts'],
