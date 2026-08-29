@@ -1,0 +1,32 @@
+{
+  "name": "@itick/stripe-connector",
+  "version": "0.2.0",
+  "description": "Connecteur de référence Stripe → ITICK : transfère vos factures Stripe payées vers ITICK (certification + routage au client final).",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "bin": { "itick-stripe-connector": "./dist/index.js" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/index.js",
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/*.test.js"
+  },
+  "keywords": ["itick", "stripe", "webhook", "facture", "invoice", "connector", "ingestion", "facturation-electronique"],
+  "author": "ITICK",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itick-app/itick-integrations.git",
+    "directory": "stripe-connector"
+  },
+  "bugs": { "url": "https://github.com/itick-app/itick-integrations/issues" },
+  "homepage": "https://github.com/itick-app/itick-integrations/tree/main/stripe-connector#readme",
+  "publishConfig": { "access": "public" },
+  "dependencies": {
+    "@itick/ingest": "file:../sdk-node"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.4.0"
+  }
+}

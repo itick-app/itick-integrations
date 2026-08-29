@@ -1,0 +1,34 @@
+# Dépendances
+node_modules/
+
+# Sorties de compilation
+dist/
+dist-test/
+*.tsbuildinfo
+
+# Couverture de tests
+coverage/
+.nyc_output/
+
+# Secrets et configuration locale — tout .env est ignoré,
+# sauf les exemples versionnés (.env.example).
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Journaux
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Systèmes de fichiers
+.DS_Store
+Thumbs.db

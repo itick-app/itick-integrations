@@ -1,0 +1,41 @@
+version: 2
+
+updates:
+  # SDK Node — @itick/ingest
+  - package-ecosystem: npm
+    directory: /sdk-node
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'chore(sdk-node)'
+
+  # Connecteur de référence Stripe
+  - package-ecosystem: npm
+    directory: /stripe-connector
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'chore(stripe-connector)'
+    ignore:
+      # Dépendance locale (file:../sdk-node) : elle se met à jour avec le dépôt.
+      - dependency-name: '@itick/ingest'
+
+  # Actions GitHub — maintient à jour les SHA épinglés dans ci.yml
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'chore(ci)'

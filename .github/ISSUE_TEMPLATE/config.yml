@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Guide d'intégration ITICK
+    url: https://itick.fr/partenaires/documentation
+    about: Comment intégrer ITICK, de bout en bout.
+  - name: Documentation interactive de l'API partenaire
+    url: https://api.itick.fr/itick/partner/docs
+    about: Points d'entrée, schémas et codes d'erreur.
+  - name: Obtenir une clé sandbox
+    url: https://itick.fr/partenaires/inscription
+    about: Inscription partenaire — l'intégration est gratuite pour les éditeurs.
+  - name: Signaler une faille de sécurité
+    url: https://github.com/itick-app/itick-integrations/blob/HEAD/SECURITY.md
+    about: N'ouvrez pas d'issue publique — la procédure est décrite ici.

@@ -1,0 +1,88 @@
+name: CI
+
+# Push sur la branche par défaut, et toute pull request (une branche de
+# travail est donc couverte dès l'ouverture de sa PR — pas de run en double).
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Aucun secret n'est nécessaire : lecture seule sur le dépôt.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20', '22']
+
+    steps:
+      # Actions épinglées par SHA : un tag peut être redéplacé, pas un commit.
+      - name: Récupérer le dépôt
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+
+      - name: Installer Node ${{ matrix.node }}
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: |
+            sdk-node/package-lock.json
+            stripe-connector/package-lock.json
+
+      # --- sdk-node ---
+      # Le SDK passe en premier : le connecteur en dépend par chemin local
+      # (file:../sdk-node) et lit ses types dans sdk-node/dist. Sans ce build,
+      # le typecheck du connecteur échoue.
+      - name: sdk-node — installation
+        run: npm ci
+        working-directory: sdk-node
+
+      - name: sdk-node — vérification de types
+        run: npm run typecheck
+        working-directory: sdk-node
+
+      - name: sdk-node — compilation
+        run: npm run build
+        working-directory: sdk-node
+
+      - name: sdk-node — tests
+        run: npm test
+        working-directory: sdk-node
+
+      # --- stripe-connector ---
+      - name: stripe-connector — installation
+        run: npm ci
+        working-directory: stripe-connector
+
+      - name: stripe-connector — vérification de types
+        run: npm run typecheck
+        working-directory: stripe-connector
+
+      - name: stripe-connector — compilation
+        run: npm run build
+        working-directory: stripe-connector
+
+      - name: stripe-connector — tests
+        run: npm test
+        working-directory: stripe-connector
+
+      # --- dépendances ---
+      # Échoue sur une vulnérabilité haute ou critique ; les niveaux plus bas
+      # sont remontés sans bloquer, pour ne pas rendre la CI rouge en
+      # permanence sur du bruit.
+      - name: sdk-node — audit des dépendances
+        run: npm audit --audit-level=high
+        working-directory: sdk-node
+
+      - name: stripe-connector — audit des dépendances
+        run: npm audit --audit-level=high
+        working-directory: stripe-connector

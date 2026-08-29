@@ -1,0 +1,38 @@
+{
+  "name": "@itick/ingest",
+  "version": "0.3.0",
+  "description": "SDK Node officiel pour pousser des reçus vers ITICK (réception de factures certifiées).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/*.test.js"
+  },
+  "keywords": ["itick", "facture", "reçu", "receipt", "invoice", "factur-x", "ingestion", "facturation-electronique", "caisse", "pos"],
+  "author": "ITICK",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itick-app/itick-integrations.git",
+    "directory": "sdk-node"
+  },
+  "bugs": { "url": "https://github.com/itick-app/itick-integrations/issues" },
+  "homepage": "https://github.com/itick-app/itick-integrations/tree/main/sdk-node#readme",
+  "publishConfig": { "access": "public" },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.4.0"
+  }
+}

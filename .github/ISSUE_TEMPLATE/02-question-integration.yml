@@ -1,0 +1,57 @@
+name: Question d'intégration
+description: Une question sur l'usage du SDK, du connecteur ou de l'API partenaire ITICK.
+title: '[question] '
+labels: ['question']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Avant de publier
+
+        **Ne collez jamais de clé API, de secret de webhook, ni de données
+        personnelles** (nom, e-mail, SIRET, facture d'un vrai client) : cette
+        issue est publique et indexée. Utilisez des valeurs factices.
+
+        Beaucoup de réponses sont déjà dans le
+        [guide d'intégration](https://itick.fr/partenaires/documentation), la
+        [documentation interactive de l'API](https://api.itick.fr/itick/partner/docs)
+        et le README de chaque paquet.
+
+  - type: dropdown
+    id: sujet
+    attributes:
+      label: Sujet
+      options:
+        - sdk-node (@itick/ingest)
+        - stripe-connector (@itick/stripe-connector)
+        - contrat de l'API partenaire (champs, erreurs, idempotence)
+        - accès sandbox / clé API
+        - autre
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Votre question
+      description: Décrivez ce que vous cherchez à faire, pas seulement ce qui bloque.
+      placeholder: |
+        Contexte : logiciel de caisse, ~2 000 tickets/jour.
+        Ce que je cherche à faire : envoyer les tickets par lots le soir.
+        Ce que je n'arrive pas à trancher : quelle clé d'idempotence utiliser.
+    validations:
+      required: true
+
+  - type: textarea
+    id: deja-essaye
+    attributes:
+      label: Ce que vous avez déjà essayé
+      description: Extraits de code ou réponses obtenues, anonymisés.
+
+  - type: checkboxes
+    id: verifications
+    attributes:
+      label: Vérifications
+      options:
+        - label: Cette issue ne contient aucune clé API, aucun secret et aucune donnée personnelle réelle.
+          required: true

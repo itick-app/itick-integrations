@@ -1,0 +1,82 @@
+name: Bogue
+description: Le SDK ou le connecteur ne se comporte pas comme la documentation l'annonce.
+title: '[bogue] '
+labels: ['bogue']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ⚠️ Avant de publier
+
+        **Ne collez jamais de clé API, de secret de webhook, ni de données
+        personnelles** (nom, e-mail, SIRET, facture d'un vrai client) : cette
+        issue est publique et indexée. Remplacez-les par des valeurs factices
+        (`itick_sandbox_xxx`, `whsec_xxx`, `client@example.com`).
+
+        **Faille de sécurité ?** N'ouvrez pas d'issue : suivez
+        [SECURITY.md](https://github.com/itick-app/itick-integrations/blob/HEAD/SECURITY.md).
+
+  - type: dropdown
+    id: paquet
+    attributes:
+      label: Paquet concerné
+      options:
+        - sdk-node (@itick/ingest)
+        - stripe-connector (@itick/stripe-connector)
+        - les deux
+        - autre / je ne sais pas
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version ou commit
+      description: Le champ `version` du package.json, ou le SHA du commit utilisé.
+      placeholder: '0.2.0 — ou e4d0c21'
+    validations:
+      required: true
+
+  - type: textarea
+    id: attendu-vs-obtenu
+    attributes:
+      label: Attendu / obtenu
+      description: Ce que vous attendiez, et ce qui s'est passé à la place.
+      placeholder: |
+        Attendu : pushReceipt renvoie un receiptId.
+        Obtenu : 400 VALIDATION_ERROR sur le champ merchantPhone.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Comment le reproduire
+      description: Le plus court extrait de code qui montre le problème. Anonymisez-le.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Message d'erreur ou trace
+      description: Collez le message brut — après avoir retiré clés, jetons et données réelles.
+      render: shell
+
+  - type: input
+    id: environnement
+    attributes:
+      label: Environnement
+      placeholder: 'Node 22.15.1, macOS 15 — ou Node 20, Docker alpine'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: verifications
+    attributes:
+      label: Vérifications
+      options:
+        - label: Cette issue ne contient aucune clé API, aucun secret et aucune donnée personnelle réelle.
+          required: true
+        - label: Il ne s'agit pas d'une faille de sécurité (sinon, voir SECURITY.md).
+          required: true
