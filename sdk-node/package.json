@@ -32,7 +32,7 @@
   "homepage": "https://github.com/itick-app/itick-integrations/tree/main/sdk-node#readme",
   "publishConfig": { "access": "public" },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^26.4.0",
     "typescript": "^5.4.0"
   }
 }
